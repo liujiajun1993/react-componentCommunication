@@ -2,7 +2,7 @@
 * @Author: bjliujiajun
 * @Date:   2016-05-27 17:05:14
 * @Last Modified by:   bjliujiajun
-* @Last Modified time: 2016-05-30 15:24:05
+* @Last Modified time: 2016-06-28 18:25:36
 * 采用PubSub来完成非父子组件之间的通信
 */
 
@@ -10,7 +10,6 @@
 
 var CaptchaButton = React.createClass({
    displayName: 'CaptchaButton',
-
    getInitialState: function getInitialState() {
       return {
          abled: true,
@@ -65,7 +64,6 @@ var CaptchaButton = React.createClass({
 });
 var SubmitButton = React.createClass({
    displayName: 'SubmitButton',
-
    handleSubmit: function handleSubmit() {
       console.log('向后台发送程序');
       PubSub.publish('popMessage', { title: '验证码错误' });
@@ -85,7 +83,6 @@ var SubmitButton = React.createClass({
 });
 var PopLayer = React.createClass({
    displayName: 'PopLayer',
-
    getInitialState: function getInitialState() {
       return {
          isShow: false,
@@ -126,7 +123,6 @@ var PopLayer = React.createClass({
 });
 var BindForm = React.createClass({
    displayName: 'BindForm',
-
    getInitialState: function getInitialState() {
       return {
          number: '',

@@ -2,20 +2,20 @@
 * @Author: bjliujiajun
 * @Date:   2016-05-27 17:05:14
 * @Last Modified by:   bjliujiajun
-* @Last Modified time: 2016-05-30 15:24:05
+* @Last Modified time: 2016-06-28 18:25:36
 * 采用PubSub来完成非父子组件之间的通信
 */
 
 'use strict';
 var CaptchaButton = React.createClass({
-   getInitialState: function(){
+   getInitialState(){
       return {
          abled: true,
          sended: false,
          countDown: -1
       }
    },
-   handleClick: function(){
+   handleClick(){
       if(!this.state.abled){
          return;
       }
@@ -45,7 +45,7 @@ var CaptchaButton = React.createClass({
          }
       }.bind(this), 1000);
    },
-   render: function(){
+   render(){
       var captchaClass = classNames({
          'send-Captcha': true,
          'disabled': this.state.sended
@@ -60,11 +60,11 @@ var CaptchaButton = React.createClass({
    }
 });
 var SubmitButton = React.createClass({
-   handleSubmit: function(){
+   handleSubmit(){
       console.log('向后台发送程序');
       PubSub.publish('popMessage', { title: '验证码错误' });
    },
-   render: function(){
+   render(){
       if(this.props.isSubmitAble)
          return (
                <button className="form-submitBtn" type="submit" onClick={this.handleSubmit}>验证</button>
@@ -75,13 +75,13 @@ var SubmitButton = React.createClass({
    }
 });
 var PopLayer = React.createClass({
-   getInitialState: function(){
+   getInitialState(){
       return {
          isShow: false,
          message: ''
       };
    },
-   showMessage: function(event, data){
+   showMessage(event, data){
       if(!this.state.isShow){
          this.setState({
             isShow: true,
@@ -95,13 +95,13 @@ var PopLayer = React.createClass({
          }.bind(this), 1000);
       }
    },
-   componentDidMount: function(){
+   componentDidMount(){
       PubSub.subscribe('popMessage', this.showMessage);
    },
-   componentWillUnmount: function(){
+   componentWillUnmount(){
       PubSub.subscribe('popMessage', this.showMessage);
    },
-   render: function(){
+   render(){
       // 不显示，返回空
       if(!this.state.isShow){
          return <div className="popLayer vertical-middle hidden"></div>;
@@ -112,27 +112,27 @@ var PopLayer = React.createClass({
    }
 });
 var BindForm = React.createClass({
-   getInitialState: function(){
+   getInitialState(){
       return {
          number: '',
          captcha: '',
          popLayershow: false
       };
    },
-   handlePhoneInput: function(event){
+   handlePhoneInput(event){
       this.setState({
          number: event.target.value
       });
    },
-   handleCapthcaInput: function(event){
+   handleCapthcaInput(event){
       this.setState({
          captcha: event.target.value
       });
    },
-   handleSubmit: function(event){
+   handleSubmit(event){
       event.preventDefault();
    },
-   render: function(){
+   render(){
       var number = this.state.number;
       var captcha = this.state.captcha;
       var isSubmitAble = /^\d{11}$/.test(this.state.number) && this.state.captcha;

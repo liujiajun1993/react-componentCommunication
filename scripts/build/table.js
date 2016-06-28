@@ -2,14 +2,13 @@
 * @Author: bjliujiajun
 * @Date:   2016-05-24 16:21:46
 * @Last Modified by:   bjliujiajun
-* @Last Modified time: 2016-05-27 19:07:23
+* @Last Modified time: 2016-06-28 18:24:32
 */
 
 'use strict';
 
 var CaptchaButton = React.createClass({
    displayName: 'CaptchaButton',
-
    getInitialState: function getInitialState() {
       return {
          abled: true,
@@ -64,7 +63,6 @@ var CaptchaButton = React.createClass({
 });
 var SubmitButton = React.createClass({
    displayName: 'SubmitButton',
-
    handleSubmit: function handleSubmit() {
       console.log('向后台发送程序');
       this.props.showPopLayer('验证码错误');
@@ -84,7 +82,6 @@ var SubmitButton = React.createClass({
 });
 var PopLayer = React.createClass({
    displayName: 'PopLayer',
-
    render: function render() {
       // 不显示，返回空
       if (!this.props.isShow) {
@@ -99,7 +96,6 @@ var PopLayer = React.createClass({
 });
 var BindForm = React.createClass({
    displayName: 'BindForm',
-
    getInitialState: function getInitialState() {
       return {
          number: '',
@@ -138,8 +134,8 @@ var BindForm = React.createClass({
          this.setState({ popLayershow: false });
       }.bind(this), 1000);
    },
-   handleSubmit: function handleSubmit() {
-      return false;
+   handleSubmit: function handleSubmit(event) {
+      event.preventDefault();
    },
    render: function render() {
       var number = this.state.number;

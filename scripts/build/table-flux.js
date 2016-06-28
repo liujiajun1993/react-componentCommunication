@@ -2,13 +2,13 @@
 * @Author: bjliujiajun
 * @Date:   2016-05-27 17:05:14
 * @Last Modified by:   bjliujiajun
-* @Last Modified time: 2016-05-30 17:44:44
+* @Last Modified time: 2016-06-28 18:26:40
 * 采用flux来完成非父子组件之间的通信
 */
 
 'use strict';
 
-/* store */
+/* store, 所有的状态更改操作都放在store中 */
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
@@ -20,7 +20,6 @@ var Store = Object.assign({}, EventEmitter.prototype, {
    getItem: function getItem(key) {
       return this.items[key] || null;
    },
-
    setItem: function setItem() {
       if (arguments.length === 2) {
          this.items[arguments[0]] = arguments[1];
@@ -36,21 +35,18 @@ var Store = Object.assign({}, EventEmitter.prototype, {
          throw new Exception('参数个数错误');
       }
    },
-
    emitShow: function emitShow() {
       this.emit('show');
    },
-
    addShowListener: function addShowListener(callback) {
       this.on('show', callback);
    },
-
    removeShowListener: function removeShowListener(callback) {
       this.removeListener('show', callback);
    }
 });
 
-/* dispatcher */
+/* dispatcher， 分发action，根据action执行不同的store操作 */
 var Dispatcher = new Flux.Dispatcher();
 Dispatcher.register(function (action) {
    switch (action.actionType) {
@@ -63,7 +59,7 @@ Dispatcher.register(function (action) {
    }
 });
 
-/* action */
+/* action，精简化的event */
 var Actions = {
    showPopLayer: function showPopLayer(text) {
       Dispatcher.dispatch({
@@ -75,7 +71,6 @@ var Actions = {
 
 var CaptchaButton = React.createClass({
    displayName: 'CaptchaButton',
-
    getInitialState: function getInitialState() {
       return {
          abled: true,
@@ -130,7 +125,6 @@ var CaptchaButton = React.createClass({
 });
 var SubmitButton = React.createClass({
    displayName: 'SubmitButton',
-
    handleSubmit: function handleSubmit() {
       console.log('向后台发送程序');
       Actions.showPopLayer('验证码错误');
@@ -150,7 +144,6 @@ var SubmitButton = React.createClass({
 });
 var PopLayer = React.createClass({
    displayName: 'PopLayer',
-
    getInitialState: function getInitialState() {
       return {
          isShow: false,
@@ -193,7 +186,6 @@ var PopLayer = React.createClass({
 });
 var BindForm = React.createClass({
    displayName: 'BindForm',
-
    getInitialState: function getInitialState() {
       return {
          number: '',
