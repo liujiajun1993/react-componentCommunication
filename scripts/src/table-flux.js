@@ -2,13 +2,13 @@
 * @Author: bjliujiajun
 * @Date:   2016-05-27 17:05:14
 * @Last Modified by:   bjliujiajun
-* @Last Modified time: 2016-05-30 17:44:44
+* @Last Modified time: 2016-06-28 16:23:25
 * 采用flux来完成非父子组件之间的通信
 */
 
 'use strict';
 
-/* store */
+/* store, 所有的状态更改操作都放在store中 */
 var Store = Object.assign({}, EventEmitter.prototype, {
   items: {
       'popLayerTitle': ''
@@ -49,7 +49,7 @@ var Store = Object.assign({}, EventEmitter.prototype, {
   }
 });
 
-/* dispatcher */
+/* dispatcher， 分发action，根据action执行不同的store操作 */
 var Dispatcher = new Flux.Dispatcher();
 Dispatcher.register(function (action) {
   switch(action.actionType) {
@@ -62,7 +62,7 @@ Dispatcher.register(function (action) {
   }
 });
 
-/* action */
+/* action，精简化的event */
 var Actions = {
   showPopLayer: function (text) {
     Dispatcher.dispatch({
