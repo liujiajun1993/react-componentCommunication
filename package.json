@@ -1,0 +1,26 @@
+{
+  "name": "react-communication",
+  "version": "1.0.0",
+  "description": "three methods of communication in reactJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liujiajun1993/react-componentCommunication.git"
+  },
+  "author": "liujiajun1993",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liujiajun1993/react-componentCommunication/issues"
+  },
+  "homepage": "https://github.com/liujiajun1993/react-componentCommunication#readme",
+  "dependencies": {
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2"
+  },
+  "devDependencies": {
+    "redux-devtools": "^3.3.1"
+  }
+}
