@@ -2,20 +2,20 @@
 * @Author: bjliujiajun
 * @Date:   2016-05-24 16:21:46
 * @Last Modified by:   bjliujiajun
-* @Last Modified time: 2016-05-27 19:07:23
+* @Last Modified time: 2016-06-28 18:24:32
 */
 
 'use strict';
 
 var CaptchaButton = React.createClass({
-   getInitialState: function(){
+   getInitialState(){
       return {
          abled: true,
          sended: false,
          countDown: -1
       }
    },
-   handleClick: function(){
+   handleClick(){
       if(!this.state.abled){
          return;
       }
@@ -45,7 +45,7 @@ var CaptchaButton = React.createClass({
          }
       }.bind(this), 1000);
    },
-   render: function(){
+   render(){
       var captchaClass = classNames({
          'send-Captcha': true,
          'disabled': this.state.sended
@@ -60,11 +60,11 @@ var CaptchaButton = React.createClass({
    }
 });
 var SubmitButton = React.createClass({
-   handleSubmit: function(){
+   handleSubmit(){
       console.log('向后台发送程序');
       this.props.showPopLayer('验证码错误');
    },
-   render: function(){
+   render(){
       if(this.props.isSubmitAble)
          return (
                <button className="form-submitBtn" type="submit" onClick={this.handleSubmit}>验证</button>
@@ -75,7 +75,7 @@ var SubmitButton = React.createClass({
    }
 });
 var PopLayer = React.createClass({
-   render: function(){
+   render(){
       // 不显示，返回空
       if(!this.props.isShow){
          return <div className="popLayer vertical-middle hidden"></div>;
@@ -86,14 +86,14 @@ var PopLayer = React.createClass({
    }
 });
 var BindForm = React.createClass({
-   getInitialState: function(){
+   getInitialState(){
       return {
          number: '',
          captcha: '',
          popLayershow: false
       };
    },
-   setPopLayerOption: function(){
+   setPopLayerOption(){
       if(arguments.length === 1){
          this.setState({
             popTitle: arguments[0],
@@ -103,32 +103,32 @@ var BindForm = React.createClass({
          throw new Error('popLayer 参数错误');
       }
    },
-   getPopLayerOption: function(){
+   getPopLayerOption(){
       return {
          title: this.state.popTitle
       }
    },
-   handlePhoneInput: function(event){
+   handlePhoneInput(event){
       this.setState({
          number: event.target.value
       });
    },
-   handleCapthcaInput: function(event){
+   handleCapthcaInput(event){
       this.setState({
          captcha: event.target.value
       });
    },
-   showPopLayer: function(title){
+   showPopLayer(title){
       this.setState({popLayershow: true});
       this.setPopLayerOption(Array.from(arguments));
       setTimeout(function(){
          this.setState({popLayershow: false});
       }.bind(this), 1000);
    },
-   handleSubmit: function(){
-      return false;
+   handleSubmit(event){
+      event.preventDefault();
    },
-   render: function(){
+   render(){
       var number = this.state.number;
       var captcha = this.state.captcha;
       var isSubmitAble = /^\d{11}$/.test(this.state.number) && this.state.captcha;
